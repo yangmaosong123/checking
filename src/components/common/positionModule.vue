@@ -2,7 +2,7 @@
   <div class="position-module">
     <!-- 左侧导航 -->
     <div class="left fl">
-      <LeftNav></LeftNav><!-- 导航组件 -->
+     
     </div>
 
     <div class="right fr">
@@ -11,7 +11,7 @@
       <div class="user">
         <!--<el-badge :value="total" class="item">系统通知</el-badge>-->
         <img src="../../assets/img/user.png" alt="" @click="handleClickPhone">
-        <span>Hi，欢迎<i>{{$store.state.account}}</i>来到废再生交易平台</span>
+        <span>Hi，欢迎<i>{{$store.state.account}}</i>来到消防评估系统</span>
         <template v-if="$store.state.account">
           <input type="text" name="" @click="goWorkCenter()" value="个人中心">
           <input type="text" name="" @click="goOut()" value="退出">
@@ -21,60 +21,8 @@
           <input class="register" type="text" name="" @click="goRegister()" value="注册">
         </template>
       </div>
-
-      <!-- 废品专区 -->
-      <div class="notices">
-        <ul>
-          <li v-for="(item,index) in tags" :class="{'border-li':index==currentIndex}"
-              @click="handleLiClick(item,index)">{{item}}
-          </li>
-        </ul>
-
-        <!-- 流程图 -->
-        <div :class="img">
-          <img src="../../assets/img/index-icon/process.png">
-        </div>
-
-      </div>
-
-      <!-- 链接入口-->
-      <div class="links" v-if="currentIndex==0||currentIndex==1">
-        <div>
-          <img @click="handleGoToCommodityList" src="../../assets/img/index-icon/release1.png" alt="">
-          <h6 @click="handleGoToCommodityList">我要求购</h6>
-        </div>
-        <div>
-          <img @click="handleGoToCommodityList" src="../../assets/img/index-icon/offer1.png" alt="">
-          <h6 @click="handleGoToCommodityList">我要出售</h6>
-        </div>
-        <div>
-          <img @click="handleGoToHelpCenter" src="../../assets/img/index-icon/complete1.png" alt="">
-          <h6 @click="handleGoToHelpCenter">帮助中心</h6>
-        </div>
-      </div>
-
-      <div class="links" v-if="currentIndex==2">
-        <div v-show="$store.state.enterpriseTypeStatus=='cf'">
-          <img @click="handleGoToWasteListCenter" src="../../assets/img/index-icon/release1.png" alt="">
-          <h6 @click="handleGoToWasteListCenter">发布产废</h6>
-        </div>
-        <div v-show="$store.state.enterpriseTypeStatus=='cf'">
-          <img @click="handleGoToWasteOfferSystemRecommendedCenter" src="../../assets/img/index-icon/offer1.png" alt="">
-          <h6 @click="handleGoToWasteOfferSystemRecommendedCenter">报价管理</h6>
-        </div>
-        <div v-show="$store.state.enterpriseTypeStatus=='cz'">
-          <img @click="handleGoToSystemCenter" src="../../assets/img/index-icon/release1.png" alt="">
-          <h6 @click="handleGoToSystemCenter"> 系统推荐</h6>
-        </div>
-        <div v-show="$store.state.enterpriseTypeStatus=='cz'">
-          <img @click="handleGoToNoticeCenter" src="../../assets/img/index-icon/offer1.png" alt="">
-          <h6 @click="handleGoToNoticeCenter">系统通知</h6>
-        </div>
-        <div>
-          <img @click="handleGoToHelpCenter" src="../../assets/img/index-icon/complete1.png" alt="">
-          <h6 @click="handleGoToHelpCenter">帮助中心</h6>
-        </div>
-      </div>
+ 
+      
 
     </div>
   </div>

@@ -3,14 +3,14 @@
     <div class="container">
 
       <!--<span class="user display" v-if="account">欢迎用户：{{account}}</span>-->
-      <div class="left-nav"><img src="../../assets/img/index-icon/classification.png" alt=""><span>商品分类</span></div>
+      <div class="left-nav"><img src="../../assets/img/index-icon/classification.png" alt=""><span>分类</span></div>
       <!-- nav导航 -->
       <el-menu :default-active="activeIndex"
                id="nav-group"
                class="el-menu-demo display"
                background-color="rgba(255, 255, 255, 1)"
                mode="horizontal"
-               :router="true" text-color="#424242"
+                text-color="#424242"
                active-text-color="#208dd6"
                @select="handleSelect">
         <el-menu-item index="/">首&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;页</el-menu-item>
@@ -31,12 +31,7 @@
           <template slot="title">知识库&nbsp;&nbsp;&nbsp;</template>
           <el-menu-item index="/repository">知识库</el-menu-item>
         </el-submenu>
-        <el-submenu index="6">
-          <template slot="title">关于我们</template>
-          <el-menu-item index="/companyIntroduction">公司介绍</el-menu-item>
-          <el-menu-item index="/joinUs">加入我们</el-menu-item>
-          <el-menu-item index="/commonProblem">常见问题</el-menu-item>
-        </el-submenu>
+        
       </el-menu>
     </div>
   </div>

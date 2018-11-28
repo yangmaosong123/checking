@@ -1,53 +1,14 @@
 <template>
   <div class="main-box">
-    <IndexCarousel></IndexCarousel>
+     
     <div class="main">
       <div class="box clearfix">
 
         <!-- 用户中心 -->
-        <PositionModule></PositionModule>
-
-        <!-- 行情指数+行情中心 -->
-        <div>
-          <marketIndex></marketIndex>
-          <IndexCenterMarket></IndexCenterMarket><!-- 行情中心 -->
-        </div>
-
-        <!-- 广告位 -->
-        <AdvertisingPositionTop></AdvertisingPositionTop>
-
-        <!-- 交易商城 -->
-        <div class="trade-mall">
-          <div class="img"><img src="../assets/img/index-icon/Trading-mall.png" alt=""></div>
-
-          <!-- 价格播报 -->
-          <PriceToBroadcastTitle></PriceToBroadcastTitle>
-          <PriceToBroadcast
-            :carouselBoxStyle="carouselBoxStyle"
-            :carouselStyle="carouselStyle"
-            :itemStyle="itemStyle"
-            :imgStyle="imgStyle"></PriceToBroadcast>
-
-          <!-- 公告+交易专区+企业推荐 -->
-          <div class="notice-and-information-and-recommend clearfix">
-            <NoticeAndInformation></NoticeAndInformation><!-- 公告+资讯 -->
-            <TradingZone></TradingZone> <!-- 交易专区 -->
-            <Recommend></Recommend><!--企业推荐 -->
-          </div>
-        </div>
-      </div>
-
-      <!-- 广告位 -->
-      <AdvertisingPositionBottom></AdvertisingPositionBottom>
-
-      <!-- 平台优势 -->
-      <AdvantageOfPlatform></AdvantageOfPlatform>
-
-      <!-- 流程 -->
-      <Icons></Icons>
-
-      <!-- 危废专区 -->
-      <WasteZone></WasteZone>
+        <PositionModule></PositionModule>  
+        
+      </div> 
+ 
     </div>
   </div>
 </template>

@@ -3,7 +3,7 @@
     <search></search>
     <Header></Header>
     <router-view v-if="isRouterAlive"></router-view>
-    <myFooter></myFooter>
+    
   </div>
 </template>
 

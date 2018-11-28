@@ -1,8 +1,7 @@
 <template>
   <el-dropdown split-button type="">
     <span class="el-dropdown-link">
-        <!--{{curProvince.title}}-->
-        {{$store.state.curProvince.title }}
+       深圳市
     </span>
     <el-dropdown-menu slot="dropdown" style="width:400px">
       <el-dropdown-item v-for="(row,index) in province" :key="index">
@@ -31,7 +30,7 @@
       return {
         province: [],
         curProvince: {
-          title: ""
+          title: "深圳市"
         },
         addr: {
           province: "",
@@ -52,25 +51,8 @@
         }
       },
     },
-    created: function () {
-      var _this = this;
-      _this.selectProvince("湖北省");
-      //_this.getLocation();
-
-      // 加载省份数据
-      _this.loadProvince(function (data) {
-        var row = [];
-        for (var i = 0; i < data.length; i++) {
-          if (i % 4 == 0) {
-            if (row.length > 0) {
-              _this.province.push(row);
-            }
-            row = [];
-          }
-          row.push(data[i]);
-        }
-        _this.province.push(row);
-      });
+    created: function () { 
+      
     },
     methods: {
 

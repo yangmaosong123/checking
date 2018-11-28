@@ -2,7 +2,7 @@
   <div class="loginBox clearfix main">
     <div class="container">
       <div class="login fr">
-        <h2>会员登录</h2>
+        <h2>用户登录</h2>
         <div class="name">
           <img class="icon1" src="../assets/img/usericon.png" alt="">
           <input style="padding-left: 43px;" type="text"
