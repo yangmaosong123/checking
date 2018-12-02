@@ -1,221 +1,477 @@
 <template>
 <div>
-  <el-card class="box-card">
-  <div slot="header" class="clearfix">
-    <span>基本信息</span>
-  </div>
-  <div>
-   <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-        <el-form-item label="所属辖区" prop="people">
-               <el-col :span="6">
-                   <el-input v-model="ruleForm.xiaqu" placeholder="请输入所属辖区"></el-input>
-               </el-col>
-               <el-col :span="2" >
-                     <el-button  icon="el-icon-search" @click="regionAdd"></el-button>
-               </el-col>
-           </el-form-item>
-        <el-form-item label="时间" >
-                  <el-col :span="6">
-                      <el-form-item prop="date1">
-                        <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
-                    </el-form-item>
-                  </el-col>
-                  <el-col :span="2">起</el-col>
-                  <el-col :span="6">
-                      <el-form-item prop="date2">
-                        <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.date2" style="width: 100%;"></el-date-picker>
-                    </el-form-item>
-                  </el-col>
-                  <el-col :span="2">止</el-col>
-            </el-form-item>
-         <el-form-item label="评估标题" prop="title">
-               <el-input v-model="ruleForm.title" placeholder="请输入评估标题"></el-input>
-           </el-form-item>        
-   </el-form>
-  </div>
-</el-card>
-    <el-collapse v-model="activeNames" >
-  <el-collapse-item title="评分信息" name="1">
-    <div>
-    <el-table :data="tableData"  border  style="width: 100%">
-        <el-table-column label="评分类型" prop="type"></el-table-column>
-        <el-table-column label="场地名称" prop="name"></el-table-column>
-         <el-table-column label="评估人" prop="people"></el-table-column>
-          <el-table-column label="总得分" prop="score"></el-table-column>
-           <el-table-column label="总扣分" prop="deduction"></el-table-column>
-         <el-table-column label="操作" width="100">
-              <template slot-scope="scope">
-               <el-button @click="handleClick(scope.row)" type="text" size="small">详情</el-button>
-            </template>
-         </el-table-column>
-    </el-table>
-    </div>
-  </el-collapse-item>
-  <el-collapse-item title="重点地区整治验收评估" name="2">
-    <div>
-   <el-row class="bianju">
-     <el-col :span="2" > 评估人员 </el-col>
-       <el-col :span="6">
-                   <el-input v-model="ruleForm.people" placeholder="请输入评估人员"></el-input>
-      </el-col>
-               <el-col :span="2" >
-                     <el-button  icon="el-icon-search" @click="add"></el-button>
-         </el-col> 
-   </el-row> 
-         <el-table :data="tableData2" :span-method="objectSpanMethod"  border style="width: 100%; margin-top: 20px">
-      <el-table-column  type="selection" width="55"> </el-table-column>
-      <el-table-column  prop="name" label="子元素">  </el-table-column>
-      <el-table-column prop="amount1"  label="评估标准"> </el-table-column>
-      <el-table-column  prop="amount2" label="评估方式"> </el-table-column>
-      <el-table-column prop="amount3" label="分值"> </el-table-column>
-    </el-table>
-    
-   
-    </div>
-  </el-collapse-item>
-   <el-collapse-item title="一票否则评估" name="3">
-    <div>
-    <el-row class="bianju">
-     <el-col :span="2" > 评估人员 </el-col>
-       <el-col :span="6">
-                   <el-input v-model="ruleForm.people" placeholder="请输入评估人员"></el-input>
-      </el-col>
-               <el-col :span="2" >
-                     <el-button  icon="el-icon-search" @click="add"></el-button>
-         </el-col> 
-   </el-row> 
-     
-    <el-table :data="tableData2" :span-method="objectSpanMethod"  border style="width: 100%; margin-top: 20px">
-      <el-table-column  type="selection" width="55"> </el-table-column>
-      <el-table-column  prop="name" label="子元素">  </el-table-column>
-      <el-table-column prop="amount1"  label="评估标准"> </el-table-column>
-      <el-table-column  prop="amount2" label="评估方式"> </el-table-column>
-      <el-table-column prop="amount3" label="分值"> </el-table-column>
-    </el-table>
-    
-    </div>
-  </el-collapse-item>
-   <el-collapse-item title="总得分分扣分评估" name="4">
-    <div>
-     <el-row class="bianju">
-     <el-col :span="2" > 评估人员 </el-col>
-       <el-col :span="6">
-                   <el-input v-model="ruleForm.people" placeholder="请输入评估人员"></el-input>
-      </el-col>
-               <el-col :span="2" >
-                     <el-button  icon="el-icon-search" @click="add"></el-button>
-         </el-col> 
-   </el-row> 
-    <el-table :data="tableData2" :span-method="objectSpanMethod"  border style="width: 100%; margin-top: 20px">
-      <el-table-column  type="selection" width="55"> </el-table-column>
-      <el-table-column  prop="name" label="子元素">  </el-table-column>
-      <el-table-column prop="amount1"  label="评估标准"> </el-table-column>
-      <el-table-column  prop="amount2" label="评估方式"> </el-table-column>
-      <el-table-column prop="amount3" label="分值"> </el-table-column>
-    </el-table>
-    </div>
-  </el-collapse-item>
-</el-collapse>
-    <employee-dialog  :show="add_opt" @people-close="peopleclose" />
-    <RegionDialog  :show="regionCheck" @region-close="regionclose"> </RegionDialog>
+    <el-card class="box-card">
+        <div slot="header" class="clearfix">
+            <span>基本信息</span>
+        </div>
+        <div>
+            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+                <el-form-item label="所属辖区" prop="locationName">
+                   <el-col :span="6">
+                  <el-input placeholder="请输入所属辖区" v-model="ruleForm.locationName">
+                    <el-button slot="append" icon="el-icon-search" @click="regionAdd"></el-button>
+                  </el-input>
+                </el-col>
+                </el-form-item>
+                <el-form-item label="时间">
+                    <el-col :span="6">
+                        <el-form-item prop="evulateStartDate">
+                            <el-date-picker type="date" value-format="yyyy-MM-dd" placeholder="选择日期" v-model="ruleForm.evulateStartDate" style="width: 100%;"></el-date-picker>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="2" style="text-align:center">起</el-col>
+                    <el-col :span="6">
+                        <el-form-item prop="evulateEndDate">
+                            <el-date-picker type="date" placeholder="选择日期" value-format="yyyy-MM-dd" v-model="ruleForm.evulateEndDate" style="width: 100%;"></el-date-picker>
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="2">止</el-col>
+                </el-form-item>
+                <el-form-item label="评估标题" prop="title">
+                    <el-input v-model="ruleForm.title" placeholder="请输入评估标题"></el-input>
+                </el-form-item>
+            </el-form>
+        </div>
+    </el-card>
+
+    <el-collapse v-model="activeNames">
+        <el-collapse-item title="重点地区整治验收评估" name="1">
+            <div>
+                <el-row class="bianju">
+                     <el-col :span="6">
+                  <el-input
+                    placeholder="请输入评估人员"
+                    v-model="ruleForm.evulatePepole "
+                    clearable
+                    :readonly="true"
+                    @clear="ruleForm.evulatePepole =''"
+                  >
+                    <el-button slot="append" icon="el-icon-search" @click="add"></el-button>
+                  </el-input>
+                </el-col>
+                </el-row>
+               <el-tabs v-model="activeName" type="card">
+            <el-tab-pane label="已启用" name="first">
+              <el-table
+                :data="enabledItemData"
+                border
+                style="width: 100%;"
+                :span-method="calSpanForEnableData"
+              >
+                <el-table-column type="index" width="50"></el-table-column>
+                <el-table-column prop="categoryName" label="子元素"></el-table-column>
+                <el-table-column prop="name" label="评估标准"></el-table-column>
+                <el-table-column prop="evaluateType" label="评估方式" width="150"></el-table-column>
+                <el-table-column prop="score" label="分值" width="100"></el-table-column>
+                <el-table-column label="操作" width="100">
+                  <template slot-scope="scope">
+                    <el-button @click="handleDisableRow(scope.row)" type="text" size="small">禁用</el-button>
+                  </template>
+                </el-table-column>
+              </el-table>
+            </el-tab-pane>
+            <el-tab-pane label="未启用" name="second">
+              <el-table
+                :data="disableItemData"
+                border
+                style="width: 100%;"
+                :span-method="calSpanForDisableData"
+              >
+                <el-table-column type="index" width="50"></el-table-column>
+                <el-table-column prop="categoryName" label="子元素"></el-table-column>
+                <el-table-column prop="name" label="评估标准"></el-table-column>
+                <el-table-column prop="evaluateType" label="评估方式"></el-table-column>
+                <el-table-column prop="score" label="分值"></el-table-column>
+                <el-table-column label="操作" width="100">
+                  <template slot-scope="context">
+                    <el-button @click="handleDisableRow2(context.row)" type="text" size="small">启用</el-button>
+                  </template>
+                </el-table-column>
+              </el-table>
+            </el-tab-pane>
+          </el-tabs>
+
+            </div>
+        </el-collapse-item>
+        <el-collapse-item title="一票否则评估" name="2">
+            <div>
+                <el-row class="bianju">
+                    <el-col :span="6">
+                  <el-input
+                    placeholder="请输入评估人员"
+                    v-model="ruleForm.evulatePepole "
+                    clearable
+                    :readonly="true"
+                    @clear="ruleForm.evulatePepole =''"
+                  >
+                    <el-button slot="append" icon="el-icon-search" @click="add"></el-button>
+                  </el-input>
+                </el-col>
+                </el-row>
+
+               <el-tabs v-model="activeName" type="card">
+            <el-tab-pane label="已启用" name="first">
+              <el-table
+                :data="enabledItemData"
+                border
+                style="width: 100%;"
+                :span-method="calSpanForEnableData"
+              >
+                <el-table-column type="index" width="50"></el-table-column>
+                <el-table-column prop="categoryName" label="子元素"></el-table-column>
+                <el-table-column prop="name" label="评估标准"></el-table-column>
+                <el-table-column prop="evaluateType" label="评估方式" width="150"></el-table-column>
+                <el-table-column prop="score" label="分值" width="100"></el-table-column>
+                <el-table-column label="操作" width="100">
+                  <template slot-scope="scope">
+                    <el-button @click="handleDisableRow(scope.row)" type="text" size="small">禁用</el-button>
+                  </template>
+                </el-table-column>
+              </el-table>
+            </el-tab-pane>
+            <el-tab-pane label="未启用" name="second">
+              <el-table
+                :data="disableItemData"
+                border
+                style="width: 100%;"
+                :span-method="calSpanForDisableData"
+              >
+                <el-table-column type="index" width="50"></el-table-column>
+                <el-table-column prop="categoryName" label="子元素"></el-table-column>
+                <el-table-column prop="name" label="评估标准"></el-table-column>
+                <el-table-column prop="evaluateType" label="评估方式"></el-table-column>
+                <el-table-column prop="score" label="分值"></el-table-column>
+                <el-table-column label="操作" width="100">
+                  <template slot-scope="context">
+                    <el-button @click="handleDisableRow2(context.row)" type="text" size="small">启用</el-button>
+                  </template>
+                </el-table-column>
+              </el-table>
+            </el-tab-pane>
+          </el-tabs>
+            </div>
+        </el-collapse-item>
+        <el-collapse-item title="总得分分扣分评估" name="3">
+            <div>
+                <el-row class="bianju">
+                    <el-col :span="6">
+                  <el-input
+                    placeholder="请输入评估人员"
+                    v-model="ruleForm.evulatePepole "
+                    clearable
+                    :readonly="true"
+                    @clear="ruleForm.evulatePepole =''"
+                  >
+                    <el-button slot="append" icon="el-icon-search" @click="add"></el-button>
+                  </el-input>
+                </el-col>
+                </el-row>
+               <el-tabs v-model="activeName" type="card">
+            <el-tab-pane label="已启用" name="first">
+              <el-table
+                :data="enabledItemData"
+                border
+                style="width: 100%;"
+                :span-method="calSpanForEnableData"
+              >
+                <el-table-column type="index" width="50"></el-table-column>
+                <el-table-column prop="categoryName" label="子元素"></el-table-column>
+                <el-table-column prop="name" label="评估标准"></el-table-column>
+                <el-table-column prop="evaluateType" label="评估方式" width="150"></el-table-column>
+                <el-table-column prop="score" label="分值" width="100"></el-table-column>
+                <el-table-column label="操作" width="100">
+                  <template slot-scope="scope">
+                    <el-button @click="handleDisableRow(scope.row)" type="text" size="small">禁用</el-button>
+                  </template>
+                </el-table-column>
+              </el-table>
+            </el-tab-pane>
+            <el-tab-pane label="未启用" name="second">
+              <el-table
+                :data="disableItemData"
+                border
+                style="width: 100%;"
+                :span-method="calSpanForDisableData"
+              >
+                <el-table-column type="index" width="50"></el-table-column>
+                <el-table-column prop="categoryName" label="子元素"></el-table-column>
+                <el-table-column prop="name" label="评估标准"></el-table-column>
+                <el-table-column prop="evaluateType" label="评估方式"></el-table-column>
+                <el-table-column prop="score" label="分值"></el-table-column>
+                <el-table-column label="操作" width="100">
+                  <template slot-scope="context">
+                    <el-button @click="handleDisableRow2(context.row)" type="text" size="small">启用</el-button>
+                  </template>
+                </el-table-column>
+              </el-table>
+            </el-tab-pane>
+          </el-tabs>
+            </div>
+        </el-collapse-item>
+    </el-collapse>
+    <employee-dialog :show="add_opt" @people-close="peopleclose" @view-People="viewpeople"/>
+    <RegionDialog :show="regionCheck" @region-close="regionclose" @view-region="viewregion"> </RegionDialog>
 </div>
 </template>
-<script>
 
+<script>
 import EmployeeDialog from "./EmployeeDialog";
 import RegionDialog from './RegionDialog'
 export default {
-    data(){
-        return{
-            add_opt:false  ,//人员选择dialog
-             regionCheck:false,  //辖区选择dialog
-            tableData:[
-                {
-                type:"线上",
-                name:"XXX1名称",
-                people:"张三",
-                score:"100",
-                deduction:"20",
+    data() {
+        return {
+            enableDataRowSpan: [], //已启用评估要素夸行数据
+            disableDataRowSpan: [], //未启用评估要素夸行数据
+             evaluatePeople: [],
+            add_opt: false, //人员选择dialog
+            regionCheck: false, //辖区选择dialog
+              activeName: "first",
+              activeNames: ["1"],
+               code: "C0000001",
+            tableData2: [],
+            ruleForm: {
+              locationName:"",
+              evulatePepole:"",
+              evulatePepoleId:"",
             },
-            {
-               type:"线上",
-                name:"XXX1名称",
-                people:"李四",
-                score:"90",
-                deduction:"10",
-            },
-            {
-               type:"线上",
-                name:"XXX1名称",
-                people:"王五",
-                score:"80",
-                deduction:"10",
-            },
-            ],
-        tableData2: [{
-          name: '道路及附属设施',
-          amount1: '道路盖板完整，安放牢固，路面平整，无绊脚(突起<2cm)',
-          amount2: 'XO',
-          amount3: '10'
-        }, {
-          name: '',
-          amount1: '道路与附属路缘石，石子填充区状态良好(无破损，无污渍，无杂草等)',
-          amount2: 'PJ',
-          amount3: '20'
-        }, {
-          name: '',
-          amount1: '地面平整，无破损，无绊脚情况',
-          amount2: 'PJ',
-          amount3: '10'
-        },],
-            ruleForm:{
+            rules: {
 
-            },
-            rules:{
-                
             },
 
         }
     },
+    created: function() {
+    this.handleGetScoreTableData(); //加载评分要素数据
+  },
     components: {
-      "employee-dialog":EmployeeDialog   ,  //人员选择组件
-      RegionDialog,   //辖区选择组件
+        "employee-dialog": EmployeeDialog, //人员选择组件
+        RegionDialog, //辖区选择组件
     },
-    methods:{
-          objectSpanMethod({ row, column, rowIndex, columnIndex }) {
-        if (columnIndex ===1 ) {
-          if (rowIndex % 3 === 0) {
-            return {
-              rowspan: 3,
-              colspan: 1
-            };
-          } else {
-            return {
-              rowspan: 0,
-              colspan: 0
-            };
-          }
+    computed:{
+      enabledItemData: function() {
+      var sz = [];
+      this.enableDataRowSpan = [];
+      for (var i = 0; i < this.tableData2.length; i++) {
+        if (this.tableData2[i].enable == true) {
+          sz.push(this.tableData2[i]);
         }
-      },
-      //人员选择
-      add:function(){
-        this.add_opt=true;
-      },
-      peopleclose:function(){
-         this.add_opt=false;
-      },
-        //辖区选择
-      regionAdd:function(){
-        this.regionCheck=true;
-      },
-      regionclose:function(){
-         this.regionCheck=false;
       }
+      this.enableDataRowSpan = this.calSpanData(sz);
+      return sz;
+    },
+     disableItemData: function() {
+      var sz = [];
+      for (var i = 0; i < this.tableData2.length; i++) {
+        if (this.tableData2[i].enable == false) {
+          sz.push(this.tableData2[i]);
+        }
+      }
+      this.disableDataRowSpan = this.calSpanData(sz);
+      return sz;
+    }
+    },
+    watch: {
+    "ruleForm.evulateStartDate": function() {
+      //判断开始日期或结束日期是否没选，如果是的话，不需要特殊处理
+      if (
+        this.ruleForm.evulateEndDate == "" ||
+        this.ruleForm.evulateStartDate == ""
+      ) {
+        return;
+      }
+      //判断开始日期是否大于结束日期，如果是的话，则清空结束日期
+      if (this.ruleForm.evulateStartDate > this.ruleForm.evulateEndDate) {
+        this.ruleForm.evulateEndDate = ""; //清空结束日期
+      }
+    },
+    "ruleForm.evulateEndDate": function() {
+      if (
+        this.ruleForm.evulateEndDate == "" ||
+        this.ruleForm.evulateStartDate == ""
+      ) {
+        return;
+      }
+      if (this.ruleForm.evulateStartDate > this.ruleForm.evulateEndDate) {
+        this.ruleForm.evulateEndDate = "";
+      }
+    },
+    
+  },
+    methods: {
+      //加载评分要素数据
+    handleGetScoreTableData() {
+      let _this = this;
+      _this
+        .$axios({
+          method: "post",
+          url: "/categoryItem/findByCategoryCode",
+          data: {
+            categoryCode: this.code
+          }
+        })
+        .then(res => {
+          _this.tableData2 = [];
+          if (res.data.status == 200) {
+            _this.tableData2 = res.data.data;
+          } else {
+            _this.tableData2 = [];
+          }
+          for (var i = 0; i < _this.tableData2.length; i++) {
+            _this.tableData2[i].enable = true;
+          }
+          _this.loadData();
+        });
+    },
+    loadData() {
+      if (!this.ruleForm.settingsId) {
+        return;
+      }
+
+      let _this = this;
+      _this
+        .$axios({
+          method: "post",
+          url: "/evalSettings/load",
+          data: { id: _this.ruleForm.settingsId }
+        })
+        .then(res => {
+          if (res.data.status == 200) {
+            _this.ruleForm = res.data.data[0];
+            _this.tableDataSite = _this.ruleForm.accountingTable;
+            _this.loadAtt();
+            for (var i = 0; i < _this.tableData2.length; i++) {
+              _this.tableData2[i].enable = false;
+              if (
+                ("," + _this.ruleForm.itemId + ",").indexOf(
+                  "," + _this.tableData2[i].itemId + ","
+                ) >= 0
+              ) {
+                _this.tableData2[i].enable = true;
+              }
+            }
+            _this.freshCategoryData();
+          }
+        });
+    },
+     //获取dailog中传过来的选中的人员
+    viewpeople: function(person) {
+      this.evaluatePeople = person;
+      var szId = [];
+      var szName = [];
+      for (var i = 0; i < person.length; i++) {
+        szId.push(person[i].personId);
+        szName.push(person[i].name);
+      }
+      this.ruleForm.evulatePepoleId = szId.join(",");
+      this.ruleForm.evulatePepole = szName.join(",");
+    },
+     concatId(sz, id) {
+      var idsz = [];
+      for (var i = 0; i < sz.length; i++) {
+        idsz.push(sz[i][id]);
+      }
+      return idsz.join(",");
+    },
+       //已启用评估要素的跨行计算方法
+    calSpanForEnableData(rowObj) {
+      return this.getRowSpan(this.enableDataRowSpan, rowObj);
+    },
+
+    //未启用评估要素的跨行计算方法
+    calSpanForDisableData(rowObj) {
+      return this.getRowSpan(this.disableDataRowSpan, rowObj);
+    },
+
+    //计算夸行
+    calSpanData(sz) {
+      var enableDataRowSpan = [];
+      for (var i = 0; i < sz.length; i++) {
+        if (enableDataRowSpan[sz[i].categoryId]) {
+          var spanObj = enableDataRowSpan[sz[i].categoryId];
+          spanObj.rowSpan++;
+        } else {
+          enableDataRowSpan[sz[i].categoryId] = {
+            rowSpan: 1,
+            spanObj: false,
+            itemId: sz[i].itemId
+          };
+        }
+      }
+      return enableDataRowSpan;
+    },
+    getRowSpan(spanArray, rowObj) {
+      if (rowObj.columnIndex != 1) {
+        return;
+      }
+      var spanObj = spanArray[rowObj.row.categoryId];
+      if (spanObj.rowSpan == 1 && spanObj.itemId == rowObj.row.itemId) {
+        return {
+          rowspan: 1,
+          colspan: 1
+        };
+      }
+      if (spanObj.rowSpan > 1 && spanObj.itemId == rowObj.row.itemId) {
+        return {
+          rowspan: spanObj.rowSpan,
+          colspan: 1
+        };
+      } else {
+        return {
+          rowspan: 0,
+          colspan: 0
+        };
+      }
+    },
+     handleDisableRow(row) {
+      row.enable = false;
+      this.freshCategoryData();
+    },
+    freshCategoryData() {
+      var sz = [];
+      sz = sz.concat(this.tableData2);
+      this.tableData2 = sz;
+    },
+    handleDisableRow2(row) {
+      row.enable = true;
+      this.freshCategoryData();
+    },
+        //人员选择
+        add: function () {
+            this.add_opt = true;
+        },
+        peopleclose: function () {
+            this.add_opt = false;
+        },
+        //辖区选择
+        regionAdd: function () {
+            this.regionCheck = true;
+        },
+        regionclose: function () {
+            this.regionCheck = false;
+        },
+         //获取dailog中传过来的选中的人员
+     viewpeople: function(person) {
+      this.evaluatePeople = person;
+      var szId = [];
+      var szName = [];
+      for (var i = 0; i < person.length; i++) {
+        szId.push(person[i].personId);
+        szName.push(person[i].name);
+      }
+      this.ruleForm.evulatePepoleId = szId.join(",");
+      this.ruleForm.evulatePepole = szName.join(",");
+    },
+    //获取dailog中传过来的选中的辖区
+    viewregion: function(region) {
+      this.ruleForm.locationName = region.fullTitle;
+      this.ruleForm.location = region.itemCode;
+    },
     }
 }
 </script>
+
 <style>
-.bianju{
-  margin-top:20px;
+.bianju {
+    margin-top: 20px;
 }
 </style>
