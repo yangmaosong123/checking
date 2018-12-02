@@ -76,8 +76,9 @@ import MarketCenterDetails from '../components/common/market/components/marketCe
 //回收订单
 import RecycleOrder from '../components/orderControl/recycleOrder'
 
-import RecBillStatus from '@/components/rec/BillStatus'
-
+import LocaleEvaluate from '@/components/evaluate_start/LocaleEvaluate'
+import AcceptanceEvaluate from '@/components/evaluate_start/AcceptanceEvaluate'
+import ProcessStart from '@/components/evaluate_start/ProcessStart'
 
 Vue.prototype.__routes = [
   {
@@ -245,7 +246,28 @@ Vue.prototype.__routes = [
         name: 'user',
         component: user,
         children: [
-          //基本信息
+          
+          {
+            path: 'localeEvaluate',
+            name: 'localeEvaluate',
+            component: LocaleEvaluate, //系统通知
+            desc: "现场评估发起页面",
+          },
+          {
+            path: 'acceptance-evaluate',
+            name: 'AcceptanceEvaluate',
+            component: AcceptanceEvaluate, //系统通知
+            desc: "现场评估发起页面",
+          },
+          
+
+          {
+            path: 'process-start',
+            name: 'ProcessStart',
+            component: ProcessStart, //系统通知
+            desc: "评估发起页面",
+          },
+          
           {
             path: 'noticeOfTheSystem',
             name: 'noticeOfTheSystem',
@@ -316,12 +338,7 @@ Vue.prototype.__routes = [
             desc: "物流信息",
           },
 
-          {
-            path: 'recBillStatus',
-            name: 'recBillStatus',
-            component: RecBillStatus,
-            desc: "可回收单据详情",
-          },
+         
 
 
           {

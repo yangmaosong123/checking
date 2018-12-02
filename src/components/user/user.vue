@@ -25,63 +25,43 @@
                 <router-link to="/user/check_manager">检查项设置</router-link>
               </el-menu-item>
               <el-menu-item index="2-2">
-                <router-link to="/user/detailedMsg">企业信息</router-link>
+                <router-link to="/user/detailedMsg">行业设置</router-link>
               </el-menu-item>
-              <el-menu-item index="2-3">
-                <router-link to="/user/addressMessage">地址信息</router-link>
+              <el-menu-item index="2-2">
+                <router-link to="/user/detailedMsg">辖区设置</router-link>
               </el-menu-item>
+            
             </el-menu-item-group>
           </el-submenu>
           <el-submenu index="3"
                       v-show="$store.state.enterpriseTypeStatus=='cf'||$store.state.enterpriseTypeStatus=='cz'">
             <template slot="title">
-              <span v-show="$store.state.enterpriseTypeStatus=='cf'">产废企业</span>
-              <span v-show="$store.state.enterpriseTypeStatus=='cz'">处置企业</span>
+              <span v-show="$store.state.enterpriseTypeStatus=='cf'">个人工作台</span>               
             </template>
-            <el-menu-item-group v-show="$store.state.enterpriseTypeStatus=='cf'">
+            <el-menu-item-group>
               <el-menu-item index="3-1">
-                <router-link to="/user/orderCommonAttack">订单处理</router-link>
+                <router-link to="/user/orderCommonAttack">我的代办</router-link>
               </el-menu-item>
               <el-menu-item index="3-2">
-                <router-link to="/user/wasteList">商品管理</router-link>
+                <router-link to="/user/wasteList">我的已办</router-link>
               </el-menu-item>
               <el-menu-item index="3-3">
-                <router-link to="/user/theOfferSystemRecommended">报价管理</router-link>
+                <router-link to="/user/theOfferSystemRecommended">草稿箱</router-link>
+              </el-menu-item>  
+             
+               <el-menu-item index="3-5">
+                <router-link to="/user/process-start">流程发起</router-link>
               </el-menu-item>
-              <el-menu-item index="3-4">
-                <router-link to="/user/contractDisposalOfEnterprise">合同管理</router-link>
-              </el-menu-item>
-              <el-menu-item index="3-5">
-                <router-link to="/user/wasteTransactionDetail">交易明细</router-link>
-              </el-menu-item>
-              <el-menu-item index="3-6">
-                <router-link to="/user/viewDisposalResults">处置结果</router-link>
-              </el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group v-show="$store.state.enterpriseTypeStatus=='cz'">
-              <el-menu-item index="3-1">
-                <router-link to="/user/theSystemRecommended">系统推荐</router-link>
-              </el-menu-item>
-              <el-menu-item index="3-3">
-                <router-link to="/user/orderProcessing">订单处理</router-link>
-              </el-menu-item>
-              <el-menu-item index="3-4">
-                <router-link to="/user/contractWasteProductionEnterprise">合同管理</router-link>
-              </el-menu-item>
-              <el-menu-item index="3-5">
-                <router-link to="/user/disposalTransactionDetail">交易明细</router-link>
-              </el-menu-item>
-            </el-menu-item-group>
+
+            </el-menu-item-group> 
           </el-submenu>
-          <el-submenu
-            v-show="$store.state.enterpriseTypeStatus=='cf'||$store.state.enterpriseTypeStatus=='cz'||$store.state.enterpriseTypeStatus=='hs'"
-            index="4">
+          <el-submenu index="4">
             <template slot="title">
-              <span>回收管理</span>
+              <span>评估管理</span>
             </template>
             <el-menu-item-group>
               <el-menu-item index="4-1">
-                <router-link to="/user/recycleOrder">回收订单推荐</router-link>
+                <router-link to="/user/recycleOrder">评估结果管理</router-link>
               </el-menu-item>
               <el-menu-item index="4-2">
                 <router-link to="/user/commodityList">回收商品管理</router-link>
@@ -90,28 +70,8 @@
                 <router-link to="/user/myTrading">回收订单处理</router-link>
               </el-menu-item>
             </el-menu-item-group>
-          </el-submenu>
-          <el-submenu index="5">
-            <template slot="title"><span>我的收藏</span></template>
-            <el-menu-item-group>
-              <el-menu-item index="5-1">
-                <router-link to="/user/enterpriseCollection">企业收藏</router-link>
-              </el-menu-item>
-              <el-menu-item index="5-2">
-                <router-link to="/user/dealCollection">商品收藏</router-link>
-              </el-menu-item>
-            </el-menu-item-group>
-          </el-submenu>
-          <el-submenu index="6">
-            <template slot="title">
-              <span>合作伙伴</span>
-            </template>
-            <el-menu-item-group>
-              <el-menu-item index="6-1">
-                <router-link to="/user/partner">合作伙伴</router-link>
-              </el-menu-item>
-            </el-menu-item-group>
-          </el-submenu>
+          </el-submenu> 
+          
         </el-menu>
       </div>
       <div class="rightContent fr">

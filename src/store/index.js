@@ -5,12 +5,12 @@ Vue.use(Vuex);
 
 
 const state = {
-  fileUploadUrl: "http://127.0.0.1：8080/wf/attachment/reupload",
-  fileDownloadUrl: "http://127.0.0.1：8080/wf/attachment/download?id=",
-  fileDownloadUrls: "http://127.0.0.1：8080/wf/attachment/downloadByBizName?bizObjId=",
-  outputImgByIdUrl: "http://127.0.0.1：8080/wf/attachment/outputImgById?id=",
-  outputImgUrl: "http://127.0.0.1：8080/wf/attachment/outputImg?bizObjId=",
-  recycleAddr: "http://127.0.0.1：8080/rec",
+  fileUploadUrl: "http://127.0.0.1:8080/wf/attachment/reupload",
+  fileDownloadUrl: "http://127.0.0.1:8080/wf/attachment/download?id=",
+  fileDownloadUrls: "http://127.0.0.1:8080/wf/attachment/downloadByBizName?bizObjId=",
+  outputImgByIdUrl: "http://127.0.0.1:8080/wf/attachment/outputImgById?id=",
+  outputImgUrl: "http://127.0.0.1:8080/wf/attachment/outputImg?bizObjId=",
+  recycleAddr: "http://127.0.0.1:8080/rec",
   //recycleAddr: "http://fzaisheng.com/rec",
   account: "",
   userId: "",
