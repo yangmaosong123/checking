@@ -50,7 +50,7 @@ import axios from 'axios'
  
  
 
-axios.defaults.baseURL = 'http://127.0.0.1:8080/wf';
+axios.defaults.baseURL = 'http://192.168.1.101:8080/wf';
 
 // axios.defaults.baseURL = 'http://192.168.5.192:8080/wf';
 // axios.defaults.baseURL = 'http://192.168.5.180/wf'

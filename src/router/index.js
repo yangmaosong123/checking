@@ -79,6 +79,7 @@ import RecycleOrder from '../components/orderControl/recycleOrder'
 import LocaleEvaluate from '@/components/evaluate_start/LocaleEvaluate'
 import AcceptanceEvaluate from '@/components/evaluate_start/AcceptanceEvaluate'
 import ProcessStart from '@/components/evaluate_start/ProcessStart'
+import Draft from '@/components/evaluate_start/Draft'
 
 Vue.prototype.__routes = [
   {
@@ -265,6 +266,12 @@ Vue.prototype.__routes = [
             path: 'process-start',
             name: 'ProcessStart',
             component: ProcessStart, //系统通知
+            desc: "评估发起页面",
+          },
+          {
+            path: 'draft',
+            name: 'draft',
+            component: Draft, //系统通知
             desc: "评估发起页面",
           },
           

@@ -81,6 +81,8 @@ export default {
   created: function() {
     this.handleGetTableData();
   },
+  mounted:function(){
+  },
   methods: {
     //changeFun (val) {
     // this.multipleSelection = val // 返回的是选中的列的数组集合

@@ -266,7 +266,11 @@ export default {
     },
     created: function() {
     this.handleGetScoreTableData(); //加载评分要素数据
-  },
+     },
+    mounted:function(){
+      
+    },
+  
     components: {
         "employee-dialog": EmployeeDialog, //人员选择组件
         RegionDialog, //辖区选择组件
