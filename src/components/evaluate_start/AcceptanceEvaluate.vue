@@ -37,8 +37,15 @@
     <el-collapse v-model="activeNames">
         <el-collapse-item title="重点地区整治验收评估" name="1">
             <div>
-                <el-row class="bianju">
-                     <el-col :span="6">
+               <el-form
+              :model="ruleForm"
+              :rules="rules"
+              ref="ruleForm"
+              label-width="100px"
+              class="demo-ruleForm"
+            >
+               <el-form-item label="评估人员" prop="evulatePepole ">
+                <el-col :span="6">
                   <el-input
                     placeholder="请输入评估人员"
                     v-model="ruleForm.evulatePepole "
@@ -49,7 +56,8 @@
                     <el-button slot="append" icon="el-icon-search" @click="add"></el-button>
                   </el-input>
                 </el-col>
-                </el-row>
+              </el-form-item>
+               </el-form>
                <el-tabs v-model="activeName" type="card">
             <el-tab-pane label="已启用" name="first">
               <el-table
@@ -95,8 +103,15 @@
         </el-collapse-item>
         <el-collapse-item title="一票否则评估" name="2">
             <div>
-                <el-row class="bianju">
-                    <el-col :span="6">
+               <el-form
+              :model="ruleForm"
+              :rules="rules"
+              ref="ruleForm"
+              label-width="100px"
+              class="demo-ruleForm"
+            >
+               <el-form-item label="评估人员" prop="evulatePepole ">
+                <el-col :span="6">
                   <el-input
                     placeholder="请输入评估人员"
                     v-model="ruleForm.evulatePepole "
@@ -107,7 +122,8 @@
                     <el-button slot="append" icon="el-icon-search" @click="add"></el-button>
                   </el-input>
                 </el-col>
-                </el-row>
+              </el-form-item>
+               </el-form>
 
                <el-tabs v-model="activeName" type="card">
             <el-tab-pane label="已启用" name="first">
@@ -153,8 +169,15 @@
         </el-collapse-item>
         <el-collapse-item title="总得分分扣分评估" name="3">
             <div>
-                <el-row class="bianju">
-                    <el-col :span="6">
+               <el-form
+              :model="ruleForm"
+              :rules="rules"
+              ref="ruleForm"
+              label-width="100px"
+              class="demo-ruleForm"
+            >
+               <el-form-item label="评估人员" prop="evulatePepole ">
+                <el-col :span="6">
                   <el-input
                     placeholder="请输入评估人员"
                     v-model="ruleForm.evulatePepole "
@@ -165,7 +188,8 @@
                     <el-button slot="append" icon="el-icon-search" @click="add"></el-button>
                   </el-input>
                 </el-col>
-                </el-row>
+              </el-form-item>
+               </el-form>
                <el-tabs v-model="activeName" type="card">
             <el-tab-pane label="已启用" name="first">
               <el-table
@@ -471,7 +495,5 @@ export default {
 </script>
 
 <style>
-.bianju {
-    margin-top: 20px;
-}
+
 </style>
